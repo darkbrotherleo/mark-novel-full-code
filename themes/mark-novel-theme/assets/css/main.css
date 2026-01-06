@@ -1,0 +1,794 @@
+/* ==========================================================================
+   THEME: MARK NOVEL THEME
+   STYLE: HUYỀN HUYỄN (XUANHUAN) - LIGHT/DARK MODE
+   VERSION: 3.5 (FINAL HEADER & MODAL BUTTONS FIX)
+   AUTHOR: MARK DEV
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES & THEME CONFIGURATION
+   -------------------------------------------------------------------------- */
+:root {
+    /* --- LIGHT MODE --- */
+    --bg-body: #f8f9fa;
+    --bg-card: #ffffff;
+    --bg-header: #ffffff;
+    
+    --text-main: #2c3e50;
+    --text-light: #666666;
+    
+    --primary: #0073aa;
+    --accent: #d4af37;
+    
+    --border: #e0e0e0;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --glow: 0 0 10px rgba(0, 115, 170, 0.15);
+    
+    --menu-text: #333333;
+    --menu-hover: #0073aa;
+    --menu-bg-sub: #ffffff;
+}
+
+/* --- DARK MODE --- */
+.theme-dark {
+    --bg-body: #121212;
+    --bg-card: #1e1e1e;
+    --bg-header: #1a1a1a;
+    
+    --text-main: #e0e0e0;
+    --text-light: #aaaaaa;
+    
+    --primary: #cf3d3d;
+    --accent: #9b59b6;
+    
+    --border: #333333;
+    --shadow: 0 4px 20px rgba(0,0,0,0.6);
+    --glow: 0 0 15px rgba(207, 61, 61, 0.3);
+    
+    --menu-text: #cccccc;
+    --menu-hover: #cf3d3d;
+    --menu-bg-sub: #252525;
+}
+
+/* --------------------------------------------------------------------------
+   2. GLOBAL RESET & TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.chapter-content, .novel-summary, .reading-area, .entry-content {
+    font-family: 'Merriweather', serif; 
+}
+
+a { color: var(--text-main); text-decoration: none; transition: all 0.2s ease; }
+a:hover { color: var(--primary); }
+ul { list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.mark-wrapper {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* --------------------------------------------------------------------------
+   3. HEADER & NAVIGATION
+   -------------------------------------------------------------------------- */
+.site-header {
+    background: var(--bg-header);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 70px;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* LOGO */
+.site-branding {
+    flex-shrink: 0;
+    margin-right: 30px;
+}
+.site-title {
+    font-size: 24px; margin: 0; line-height: 1;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+}
+.site-title a { color: var(--primary); }
+
+.site-branding .custom-logo-link {
+    display: block; /* Đảm bảo thẻ a bao quanh logo hiện thị dạng khối */
+    line-height: 0; /* Xóa khoảng trắng thừa dưới ảnh */
+}
+
+.site-branding .custom-logo {
+    max-height: 50px; /* Giới hạn chiều cao logo cho vừa header 70px */
+    width: auto;      /* Chiều rộng tự động theo tỷ lệ */
+    display: block;
+    object-fit: contain; /* Đảm bảo ảnh không bị méo */
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .site-branding .custom-logo {
+        max-height: 40px; /* Logo nhỏ hơn trên điện thoại */
+    }
+}
+
+/* MENU CHÍNH */
+.main-navigation {
+    flex-grow: 1;
+}
+.nav-menu { display: flex; gap: 20px; margin: 0; padding: 0; }
+.nav-menu > li > a {
+    font-weight: 600; text-transform: uppercase; font-size: 14px;
+    color: var(--menu-text); padding: 24px 0; display: block; position: relative;
+}
+.nav-menu > li > a:hover { color: var(--primary); }
+.nav-menu > li > a::after {
+    content: ''; position: absolute; bottom: 18px; left: 0;
+    width: 0; height: 2px; background: var(--primary); transition: width 0.3s;
+}
+.nav-menu > li > a:hover::after { width: 100%; }
+
+/* Dropdown Submenu */
+.nav-menu li { position: relative; }
+.nav-menu .sub-menu {
+    position: absolute; top: 100%; left: 0;
+    background: var(--menu-bg-sub); box-shadow: var(--shadow);
+    border-top: 2px solid var(--primary); min-width: 220px;
+    z-index: 999; opacity: 0; visibility: hidden;
+    transform: translateY(10px); transition: 0.3s ease;
+    padding: 10px 0; border-radius: 0 0 4px 4px;
+}
+.nav-menu li:hover > .sub-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-menu .sub-menu li a {
+    display: block; padding: 8px 20px; color: var(--text-main);
+    border-bottom: 1px dashed var(--border); font-size: 14px;
+}
+.nav-menu .sub-menu li a:hover { color: var(--primary); background: rgba(0,0,0,0.02); }
+
+/* HEADER TOOLS */
+.header-tools {
+    display: flex; align-items: center; gap: 15px; flex-shrink: 0;
+}
+
+.header-search-icon, .theme-switcher button {
+    background: transparent; border: none; cursor: pointer;
+    font-size: 18px; color: var(--text-main); padding: 5px;
+    display: flex; align-items: center;
+}
+.header-search-icon:hover, .theme-switcher button:hover { color: var(--primary); }
+
+.header-search-form {
+    position: absolute; top: 60px; right: 0;
+    background: var(--bg-card); padding: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 4px;
+    border: 1px solid var(--border); width: 250px;
+    display: none;
+}
+.header-search-icon:hover .header-search-form { display: block; }
+.header-search-form input {
+    width: 100%; padding: 8px; border: 1px solid var(--border);
+    border-radius: 4px; background: var(--bg-body); color: var(--text-main);
+}
+
+/* --------------------------------------------------------------------------
+   4. USER ACCOUNT (HEADER BUTTONS - EQUAL SIZE FIX)
+   -------------------------------------------------------------------------- */
+
+/* Container căn giữa */
+.user-guest {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Khoảng cách rộng thoáng */
+}
+
+/* --- STYLE CHUNG CHO CẢ 2 NÚT (Để kích thước bằng nhau) --- */
+.btn-login, .btn-register {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Căn chữ giữa nút */
+    height: 40px;           /* Chiều cao cố định bằng nhau */
+    min-width: 130px;       /* Chiều rộng tối thiểu bằng nhau */
+    padding: 0 20px;
+    border-radius: 50px;    /* Bo tròn hoàn hảo */
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    line-height: 1;
+    text-decoration: none !important;
+}
+
+/* --- NÚT ĐĂNG NHẬP (Ghost Button - Viền Gradient) --- */
+.btn-login {
+    background: transparent;
+    color: var(--primary);
+    /* Tạo viền giả để không làm lệch kích thước */
+    box-shadow: inset 0 0 0 2px var(--primary); 
+}
+
+.btn-login:hover {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 115, 170, 0.3);
+    transform: translateY(-2px);
+}
+
+/* --- NÚT ĐĂNG KÝ (Solid Button - Nền Gradient) --- */
+.btn-register {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: #fff !important;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 115, 170, 0.4);
+    filter: brightness(1.1);
+}
+
+/* --- RESPONSIVE MOBILE (Thu nhỏ lại để vừa màn hình) --- */
+@media (max-width: 768px) {
+    .user-guest { gap: 8px; }
+    
+    .btn-login, .btn-register {
+        height: 32px;        /* Nhỏ lại */
+        min-width: auto;     /* Bỏ chiều rộng cố định */
+        padding: 0 12px;
+        font-size: 11px;
+    }
+}
+
+/* --- USER LOGGED IN (GIỮ NGUYÊN) --- */
+.user-logged {
+    position: relative;
+    margin-left: 15px;
+    padding-left: 15px;
+    border-left: 1px solid var(--border);
+}
+.user-trigger {
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+    padding: 4px; border-radius: 30px; transition: 0.3s;
+    border: 1px solid transparent;
+}
+.user-trigger:hover { background: var(--bg-body); border-color: var(--border); }
+.user-trigger img {
+    border-radius: 50%; width: 36px; height: 36px;
+    object-fit: cover; border: 2px solid var(--accent);
+}
+.user-name {
+    font-size: 14px; font-weight: 700; max-width: 120px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--primary);
+}
+
+/* Dropdown Menu */
+.user-dropdown {
+    position: absolute;
+    top: 140%; right: 0;
+    width: 200px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 10px 0;
+    opacity: 0; visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+.user-dropdown::before {
+    content: ''; position: absolute; top: -6px; right: 20px;
+    width: 12px; height: 12px; background: var(--bg-card);
+    border-left: 1px solid var(--border); border-top: 1px solid var(--border);
+    transform: rotate(45deg);
+}
+.user-logged:hover .user-dropdown {
+    opacity: 1; visibility: visible; top: 110%; transform: translateY(0);
+}
+.user-dropdown li a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 20px; font-size: 14px; color: var(--text-main); font-weight: 500;
+}
+.user-dropdown li a:hover {
+    color: var(--primary); background: rgba(0, 115, 170, 0.05); padding-left: 25px;
+}
+.user-dropdown .sep { height: 1px; background: var(--border); margin: 8px 0; }
+.user-dropdown .logout { color: #e74c3c; }
+
+/* --------------------------------------------------------------------------
+   5. ARCHIVE & NOVEL CARDS
+   -------------------------------------------------------------------------- */
+.novel-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px;
+}
+.novel-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden; transition: 0.3s; position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.novel-card:hover { transform: translateY(-5px); box-shadow: var(--glow); border-color: var(--primary); }
+
+.thumb-link {
+    display: block; width: 100%; aspect-ratio: 2/3;
+    overflow: hidden; position: relative; background: #eee;
+}
+.thumb-link img {
+    width: 100% !important; height: 100% !important; object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.novel-card:hover .thumb-link img { transform: scale(1.1); }
+
+.novel-body { padding: 15px; }
+.novel-body h3 {
+    margin: 0 0 5px 0; font-size: 16px; line-height: 1.4;
+    overflow: hidden; text-overflow: ellipsis;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.novel-body h3 a { color: var(--text-main); }
+.novel-body h3 a:hover { color: var(--accent); }
+.novel-meta { font-size: 12px; color: var(--text-light); }
+
+/* --------------------------------------------------------------------------
+   6. SINGLE NOVEL & CHAPTER
+   -------------------------------------------------------------------------- */
+.site-content {
+    display: grid; grid-template-columns: 1fr 320px; gap: 40px;
+}
+
+/* Trang chi tiết truyện */
+.novel-header {
+    display: flex; gap: 30px; margin-bottom: 40px; align-items: flex-start;
+}
+.novel-thumb { width: 300px; flex-shrink: 0; }
+.novel-thumb .thumb-link {
+    width: 100%; aspect-ratio: 2/3; border-radius: 8px;
+    overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);
+}
+.novel-info { flex-grow: 1; }
+.novel-title {
+    margin-top: 0; font-size: 28px; line-height: 1.4;
+    color: var(--primary); margin-bottom: 20px;
+}
+
+/* Nút chức năng */
+.novel-actions { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 25px; }
+.btn-action {
+    display: inline-flex !important; align-items: center !important; gap: 8px !important;
+    padding: 10px 20px !important; border-radius: 30px !important;
+    font-weight: 600 !important; font-size: 14px !important;
+    text-transform: uppercase !important; cursor: pointer !important;
+    transition: 0.3s ease !important; border: 2px solid transparent !important;
+}
+.btn-action:hover { transform: translateY(-3px); }
+
+.btn-read-first { background: var(--primary) !important; color: #fff !important; }
+.btn-read-last { background: var(--accent) !important; color: #fff !important; }
+.btn-bookmark, .btn-like, .btn-report {
+    background: transparent !important; color: var(--text-main) !important;
+    border-color: var(--border) !important;
+}
+.btn-bookmark:hover, .btn-like:hover { border-color: var(--primary) !important; color: var(--primary) !important; }
+.btn-report:hover { border-color: #e74c3c !important; color: #e74c3c !important; }
+
+/* Đã lưu/like */
+.btn-bookmark.saved, .btn-like.liked {
+    background: rgba(231, 76, 60, 0.1) !important;
+    border-color: #e74c3c !important; color: #e74c3c !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. WIDGETS & FOOTER
+   -------------------------------------------------------------------------- */
+.widget {
+    background: var(--bg-card); border: 1px solid var(--border);
+    padding: 25px; margin-bottom: 30px; border-radius: 8px;
+}
+.widget-title {
+    font-size: 18px; font-weight: bold; color: var(--primary);
+    border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-bottom: 20px;
+}
+.widget ul li { padding: 10px 0; border-bottom: 1px dashed var(--border); }
+.widget ul li a { color: var(--text-main); display: block; }
+.widget ul li a:hover { color: var(--accent); padding-left: 5px; }
+
+.site-footer {
+    background: var(--bg-card); border-top: 5px solid var(--primary);
+    margin-top: 60px; color: var(--text-light);
+}
+.footer-widgets {
+    padding: 50px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+    border-bottom: 1px solid var(--border);
+}
+.footer-title {
+    color: var(--accent); font-size: 18px; margin-bottom: 20px;
+    border-left: 3px solid var(--primary); padding-left: 15px;
+}
+.site-copyright { text-align: center; padding: 20px 0; font-size: 14px; }
+
+/* --------------------------------------------------------------------------
+   8. AUTH MODALS (SYNCED BUTTONS & GRADIENT)
+   -------------------------------------------------------------------------- */
+.mark-modal { display: none; position: fixed; z-index: 99999; top: 0; left: 0; width: 100%; height: 100%; }
+.modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(3px); }
+.modal-box { position: relative; background: var(--bg-card); width: 90%; max-width: 420px; margin: 60px auto; padding: 40px 30px; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); animation: slideDown 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28); }
+@keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-close { position: absolute; top: 15px; right: 20px; font-size: 32px; cursor: pointer; color: #999; line-height: 1; transition: 0.3s; }
+.modal-close:hover { color: var(--primary); transform: rotate(90deg); }
+.modal-title { text-align: center; color: var(--primary); margin-bottom: 25px; font-size: 24px; font-weight: 800; text-transform: uppercase; background: linear-gradient(to right, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
+
+/* --- INPUT STYLES --- */
+.modal-body label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: var(--text-main); }
+.modal-body input:not([type="submit"]):not([type="checkbox"]), 
+.modal-body input[type="email"],
+.modal-body input[type="password"],
+.modal-body input[type="text"] {
+    width: 100%; padding: 12px 15px; border-radius: 8px; background: var(--bg-body); color: var(--text-main); margin-bottom: 20px; font-size: 15px; transition: all 0.3s ease; border: 1px solid var(--border);
+}
+.modal-body input:not([type="submit"]):focus { outline: none; border-color: var(--primary); background: var(--bg-card); box-shadow: 0 0 0 4px rgba(0, 115, 170, 0.1); }
+
+/* --- BUTTON STYLES (ĐỒNG BỘ TUYỆT ĐỐI GIỮA ĐĂNG NHẬP VÀ ĐĂNG KÝ) --- */
+.modal-body input[type="submit"], 
+.modal-body button[type="submit"],
+.modal-body .btn-action {
+    width: 100%; 
+    padding: 14px; 
+    
+    /* Gradient giống nhau */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    
+    color: white !important; 
+    border: none; 
+    border-radius: 50px; 
+    font-weight: bold; 
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 115, 170, 0.3);
+    
+    /* Reset style mặc định của browser */
+    -webkit-appearance: none;
+    appearance: none;
+    line-height: normal;
+}
+
+.modal-body input[type="submit"]:hover,
+.modal-body button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 115, 170, 0.4);
+    filter: brightness(1.1);
+}
+
+/* Checkbox & Links */
+.login-remember { margin-bottom: 20px; font-size: 14px; display: flex; align-items: center; gap: 5px; }
+.login-remember input { width: auto !important; margin: 0; }
+.modal-footer-link { text-align: center; margin-top: 25px; font-size: 14px; color: var(--text-light); border-top: 1px solid var(--border); padding-top: 15px; }
+.modal-footer-link a { color: var(--primary); font-weight: bold; text-decoration: none; }
+.modal-footer-link a:hover { text-decoration: underline; color: var(--accent); }
+
+/* Mobile Responsive cho Modal */
+@media (max-width: 480px) {
+    .modal-box { width: 95%; padding: 30px 20px; margin: 40px auto; }
+    .modal-title { font-size: 20px; }
+}
+
+/* --------------------------------------------------------------------------
+   9. USER PROFILE PAGE (REDESIGNED - DASHBOARD STYLE)
+   -------------------------------------------------------------------------- */
+
+/* 1. Layout Tổng thể (2 Cột) */
+.user-profile-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr; /* Sidebar cố định 280px, Content giãn hết cỡ */
+    gap: 30px;
+    align-items: start; /* Căn trên cùng */
+}
+
+/* 2. Sidebar (Cột trái) */
+.user-sidebar {
+    background: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: sticky; /* Ghim sidebar khi cuộn */
+    top: 90px; /* Cách header một chút */
+}
+
+/* Avatar Box */
+.user-avatar-box {
+    padding: 30px 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(0, 115, 170, 0.03), transparent);
+    border-bottom: 1px solid var(--border);
+}
+
+.user-avatar-box img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px;
+    border: 4px solid var(--bg-card); /* Viền trắng tách nền */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Đổ bóng ảnh */
+}
+
+.user-avatar-box h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+}
+
+/* Menu bên trái */
+.user-menu {
+    padding: 10px 0;
+    margin: 0;
+}
+
+.user-menu li {
+    margin: 0;
+    list-style: none;
+}
+
+.user-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 25px;
+    color: var(--text-main);
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent; /* Chuẩn bị cho hover */
+}
+
+.user-menu li a i {
+    font-size: 18px;
+    color: var(--text-light);
+    transition: 0.2s;
+}
+
+/* Hiệu ứng Hover & Active Menu */
+.user-menu li a:hover, 
+.user-menu li a.active {
+    background: rgba(0, 115, 170, 0.04);
+    color: var(--primary);
+    border-left-color: var(--primary); /* Hiện viền trái */
+    font-weight: 700;
+}
+
+.user-menu li a:hover i,
+.user-menu li a.active i {
+    color: var(--primary);
+}
+
+/* 3. Content (Cột phải) */
+.user-content {
+    background: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 40px;
+    min-height: 400px;
+}
+
+/* Tiêu đề Tab */
+.user-content h2 {
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.user-content h2::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 24px;
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+/* 4. Form Style (Tab Thông tin) */
+.profile-form {
+    max-width: 600px;
+}
+
+.profile-form p {
+    margin-bottom: 20px;
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 14px;
+}
+
+.profile-form input[type="text"],
+.profile-form input[type="password"],
+.profile-form input[type="email"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-body);
+    color: var(--text-main);
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+.profile-form input[disabled] {
+    background: #f0f0f0; /* Màu xám cho ô không sửa được */
+    color: #888;
+    cursor: not-allowed;
+    border-color: transparent;
+}
+
+.profile-form input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 115, 170, 0.1);
+    background: var(--bg-card);
+}
+
+/* Nút Submit Form */
+.profile-form button[type="submit"] {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+.profile-form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* 5. Tủ Truyện Grid (Tab Bookmark) */
+/* (Tận dụng lại .novel-grid global nhưng tinh chỉnh chút cho đẹp trong khung này) */
+.user-content .novel-card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.user-content .novel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* 6. Lịch Sử List (Tab History) */
+.history-list-full li {
+    padding: 15px;
+    border-bottom: 1px dashed var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s;
+    border-radius: 6px;
+}
+
+.history-list-full li:hover {
+    background: var(--bg-body);
+}
+
+.history-list-full li:last-child {
+    border-bottom: none;
+}
+
+.history-info a {
+    display: block;
+    line-height: 1.4;
+}
+
+.history-time {
+    font-size: 12px;
+    color: var(--text-light);
+    white-space: nowrap;
+    background: rgba(0,0,0,0.05);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-left: 15px;
+}
+
+/* Dark Mode Tweaks cho trang User */
+.theme-dark .profile-form input[disabled] {
+    background: #2a2a2a;
+    color: #666;
+}
+.theme-dark .history-list-full li:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+/* 7. Mobile Responsive */
+@media (max-width: 768px) {
+    .user-profile-layout {
+        grid-template-columns: 1fr; /* Xếp dọc trên mobile */
+        gap: 20px;
+    }
+    
+    .user-sidebar {
+        position: static; /* Bỏ ghim trên mobile */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .user-avatar-box {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    
+    .user-menu {
+        width: 100%;
+        display: flex;
+        overflow-x: auto; /* Cho phép cuộn ngang menu nếu dài */
+        padding: 10px;
+        border-top: 1px solid var(--border);
+        white-space: nowrap;
+    }
+    
+    .user-menu li a {
+        padding: 10px 15px;
+        border-left: none;
+        border-bottom: 3px solid transparent; /* Đổi sang border dưới */
+        border-radius: 4px;
+    }
+    
+    .user-menu li a.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--primary);
+        background: none;
+    }
+
+    .user-content {
+        padding: 20px; /* Giảm padding trên mobile */
+    }
+
+    .history-list-full li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    .history-time {
+        margin-left: 0;
+        font-size: 11px;
+    }
+}

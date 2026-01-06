@@ -1,0 +1,17 @@
+.mark-results-box {
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none;
+    background: #fff;
+}
+.mark-result-item {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+.mark-result-item:hover {
+    background: #f0f0f1;
+    color: #2271b1;
+}

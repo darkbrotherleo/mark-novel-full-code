@@ -1,0 +1,16 @@
+# Bỏ qua thư mục nặng
+uploads/
+upgrade/
+cache/
+et-cache/
+w3tc-config/
+
+# Bỏ qua file hệ thống/rác
+*.log
+*.sql
+*.zip
+*.gz
+*.rar
+Thumbs.db
+.DS_Store
+node_modules/

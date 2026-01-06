@@ -1,0 +1,19 @@
+/*
+Theme Name: Mark Novel Theme
+Theme URI: https://markdev.com
+Author: Mark Dev
+Author URI: https://markdev.com
+Description: Theme siêu nhẹ dành riêng cho web truyện chữ.
+Version: 1.0.0
+Text Domain: mark-novel-theme
+*/
+
+/* Reset CSS cơ bản để trình duyệt hiển thị giống nhau */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Roboto', sans-serif; background: #f4f4f4; color: #333; line-height: 1.6; }
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+img { max-width: 100%; height: auto; }
+
+/* Container chung */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 15px; }
